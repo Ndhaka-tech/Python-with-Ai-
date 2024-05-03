@@ -1,0 +1,27 @@
+from textblob import TextBlob  # Import TextBlob for sentiment analysis
+
+class Chatbot:
+    def __init__(self):
+        self.sentiment_analyzer = TextBlob("")  # Initialize sentiment analyzer with an empty string
+
+    def start_chat(self):
+        print("chatbot: Hey Hello, how can I help you, my friend?")
+        while True:
+            user_message = input("You: ").strip()
+
+            self.sentiment_analyzer = TextBlob(user_message)
+            sentiment_score = self.sentiment_analyzer.sentiment.polarity
+
+            if sentiment_score > 0:
+                chatbot_message = f"chatbot: That is great to hear.\nSentiment score: {sentiment_score}"
+            elif sentiment_score < 0:
+                chatbot_message = f"chatbot: I am sorry to hear that. Can I forward you to the call line?\nSentiment score: {sentiment_score}"
+            else:
+                chatbot_message = f"chatbot: Hmm, I see. Can you please provide more information?\nSentiment score: {sentiment_score}"
+
+            print(chatbot_message)
+
+
+if __name__ == "__main__":  # Add colon at the end
+    chatbot = Chatbot()
+    chatbot.start_chat()
